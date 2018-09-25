@@ -153,6 +153,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GraphsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecordController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -221,6 +222,11 @@
     <Content Include="Views\Welcome\Details.cshtml" />
     <Content Include="Views\Welcome\Edit.cshtml" />
     <Content Include="Views\Welcome\Index.cshtml" />
+    <Content Include="Views\Graphs\Create.cshtml" />
+    <Content Include="Views\Graphs\Delete.cshtml" />
+    <Content Include="Views\Graphs\Details.cshtml" />
+    <Content Include="Views\Graphs\Edit.cshtml" />
+    <Content Include="Views\Graphs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
