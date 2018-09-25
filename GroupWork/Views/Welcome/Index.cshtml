@@ -1,0 +1,9 @@
+﻿@model GroupWork.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<p>@Session["UserID"]</p>
+<p>Hello  @Html.DisplayFor(model => model.UserName)</p>
