@@ -208,6 +208,7 @@
     <Content Include="Views\Record\Details.cshtml" />
     <Content Include="Views\Record\Edit.cshtml" />
     <Content Include="Views\Record\Index.cshtml" />
+    <Content Include="Views\Record\ChangeUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -121,6 +121,12 @@ namespace GroupWork.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ChangeUser()
+        {
+            var records = db.Records.Include(r => r.User);
+            return View(records.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
