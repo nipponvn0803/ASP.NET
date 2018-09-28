@@ -9,8 +9,8 @@ namespace GroupWork.Models
     {
         public int ID { get; set; }
         public string UserName { get; set; }
-        public int WeightGoal { get; set; }
-        public int HeightGoal { get; set; }
+        public float WeightGoal { get; set; }
+        public float HeightGoal { get; set; }
 
         public virtual ICollection<Record> Records { get; set; }
     }
