@@ -1,4 +1,4 @@
-﻿@model GroupWork.Models.User
+﻿@model IEnumerable<GroupWork.Models.Record>
 
 @{
     ViewBag.Title = "Details";
@@ -6,4 +6,44 @@
 
 <h2>Details</h2>
 <p>@Session["UserID"]</p>
-<p>Hello  @Html.DisplayFor(model => model.UserName)</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InputDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InputDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RecordID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RecordID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RecordID })
+            </td>
+        </tr>
+    }
+
+</table>

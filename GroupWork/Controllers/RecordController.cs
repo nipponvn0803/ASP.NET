@@ -16,10 +16,17 @@ namespace GroupWork.Controllers
         private RecordContext db = new RecordContext();
 
         // GET: Record
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             var records = db.Records.Include(r => r.User);
-            return View(records.ToList());
+            User user = db.Users.Find(id);
+            Session["UserID"] = id; //Save session value
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var recordsList = records.Where(p => p.UserID == (int)id).ToList();
+            return View(recordsList);
         }
 
         // GET: Record/Details/5

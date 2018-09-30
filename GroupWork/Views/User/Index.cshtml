@@ -31,9 +31,9 @@
         </div>
     </div>
 
-    <button class="createNewButton">
-        @Html.ActionLink("Create New", "Create")
-    </button>
+    <form style="display: inline" action="@Url.Action("Create", "User")" method="get">
+        <button class="btn btn-primary">New user</button>
+    </form>
 
 </div>
 

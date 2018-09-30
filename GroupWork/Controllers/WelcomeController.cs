@@ -18,13 +18,15 @@ namespace GroupWork.Controllers
         // GET: Welcome
         public ActionResult Index(int id)
         {
-            Session["UserID"] = id; //Save session value
+            var records = db.Records.Include(r => r.User);
             User user = db.Users.Find(id);
+            Session["UserID"] = id; //Save session value
             if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            var recordsList = records.Where(p => p.UserID == (int)id).ToList();
+            return View(recordsList);
         }
 
         // GET: Welcome/Details/5
