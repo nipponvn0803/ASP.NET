@@ -4,7 +4,66 @@
     ViewBag.Title = "Index";
 }
 
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+</head>
+
 <h2>Index</h2>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+<script>
+    var weight = [];
+    var date = [];
+
+    @foreach (var record in Model)
+    {
+        @:weight.push("@record.Weight");
+        @:date.push("@record.InputDate");
+    }
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+
+                type: 'line',
+                data: {
+
+                    labels: date,
+                    datasets: [{
+                label: 'weight record',
+                        data: weight,
+                        backgroundColor: [
+                            'rgba(255,255,255, 0)',
+                            'rgba(255,255,255, 0)',
+                            'rgba(255,255,255, 0)',
+                            'rgba(255,255,255, 0)',
+                            'rgba(255,255,255, 0)',
+                            'rgba(255,255,255, 0)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -26,26 +85,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Weight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Height)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InputDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RecordID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RecordID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RecordID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InputDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RecordID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RecordID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RecordID })
+            </td>
+        </tr>
+    }
 
 </table>

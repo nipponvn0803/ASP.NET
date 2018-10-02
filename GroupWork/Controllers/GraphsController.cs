@@ -19,10 +19,13 @@ namespace GroupWork.Controllers
         public ActionResult Index()
         {
             var records = db.Records.Include(r => r.User);
-            var x = Session["User"];
-            Session["User"] = "Roberts";
-            Console.Write(Session["User"]);
-            return View(records.ToList());
+            var userId = Session["UserId"];
+            if (userId == null)
+            {
+                userId = 1;
+            }
+            var recordsList = records.Where(p => p.UserID == (int)userId).ToList();
+            return View(recordsList);
         }
 
         // GET: Graphs/Details/5
