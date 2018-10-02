@@ -9,7 +9,7 @@
 @if (Model.First().User.WeightGoal == 0)
 {
     <h3>No weight goal set.</h3>
-    <form style="display: inline" action="@Url.Action("Index", "Home")" method="get">
+    <form style="display: inline" action="@Url.Action("Edit", "Progress", new { id=Model.First().RecordID })" method="get">
         <button class="btn btn-primary">Set weight goal</button>
     </form>
 

@@ -75,13 +75,12 @@ namespace GroupWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Record record = db.Records.Find(id);
-            if (record == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "UserName", record.UserID);
-            return View(record);
+            return View(user);
         }
 
         // POST: Progress/Edit/5
@@ -89,16 +88,16 @@ namespace GroupWork.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecordID,UserID,Weight,Height,InputDate")] Record record)
+        public ActionResult Edit([Bind(Include = "ID,WeightGoal")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(record).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "UserName", record.UserID);
-            return View(record);
+            ViewBag.UserID = new SelectList(db.Users, "ID", "UserName", user.ID);
+            return View(user);
         }
 
         // GET: Progress/Delete/5
