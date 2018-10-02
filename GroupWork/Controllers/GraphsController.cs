@@ -24,7 +24,7 @@ namespace GroupWork.Controllers
             {
                 userId = 1;
             }
-            var recordsList = records.Where(p => p.UserID == (int)userId).ToList();
+            var recordsList = records.Where(p => p.UserID == (int)userId).OrderBy(p => p.InputDate).ToList();
             return View(recordsList);
         }
 
