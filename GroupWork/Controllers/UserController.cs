@@ -18,6 +18,11 @@ namespace GroupWork.Controllers
         // GET: User
         public ActionResult Index()
         {
+            if (Session["AsrIndex"] == null)
+            {
+                Session["AsrIndex"] = DateTime.Now;
+                return View("~/Views/Home/About.cshtml");
+            }
             return View(db.Users.ToList());
         }
 

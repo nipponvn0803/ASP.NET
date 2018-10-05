@@ -1,0 +1,55 @@
+﻿img {
+    width: 60%;
+}
+
+.row{
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+#profileContainer {
+    transition: all 0.4s;
+    transition-timing-function: ease;
+    transform: translateY(200px);
+}
+
+.profileImage {
+    margin-top: 50px;
+    border-radius: 150px;
+}
+
+.col-centered {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#userName{
+    font-size: 5rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.clickBait {
+
+}
+
+.clickBaitContainer {
+    visibility: hidden;
+    display: inline-block;
+    vertical-align: top;
+    padding: 25px;
+    transition: all 0.4s;
+    transform: translateY(200px);
+}
+
+    .clickBaitContainer:hover {
+        cursor: pointer;
+        opacity: 0.3;
+    }
+
+.descText{
+    margin-top: 20px;
+    font-size: 3rem;
+}

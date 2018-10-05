@@ -1,7 +1,17 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<head>
 
-<p>Use this area to provide additional information.</p>
+</head>
+<body>
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+
+    <p>Use this area to provide additional information.</p>
+
+    <p>@Html.ActionLink("Choose user", "Index", "User")</p>
+</body>
+<script>
+        document.getElementById("navbar").style.display = "none";
+</script>

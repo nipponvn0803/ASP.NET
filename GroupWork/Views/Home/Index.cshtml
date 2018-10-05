@@ -1,17 +1,65 @@
-﻿@model IEnumerable<GroupWork.Models.Record>
+﻿@model IEnumerable<GroupWork.Models.User>
 @{
     ViewBag.Title = "Home Page";
 }
+<head>
+    <link href="@Url.Content("~/Content/Home.css")" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 
-<div class="jumbotron">
-    <h1>Weight Tracking App</h1>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Track your weight with this app</h2>
+<body>
 
-        <p>
-            
-        </p>
-    </div>
-</div>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+
+            <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3 col-centered" id="profileContainer">
+                <img class="profileImage" src="https://avatars.dicebear.com/v2/identicon/: + @Html.DisplayFor(modelItem => item.UserName) +.svg" alt="Alternate Text" />
+                <p id="userName">@Html.DisplayFor(modelItem => item.UserName)</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="clickBaitContainer col-xs-6 col-sm-4 col-md-4 col-lg-4" id="weightContainer" onclick="window.location.href='/Record/Index/'+@Html.DisplayFor(modelItem => item.ID)">
+                <img class="clickBait" src="~/img/weight.png" style="height: 10%;" />
+                <p class="descText">Record</p>
+            </div>
+
+            <div class="clickBaitContainer col-xs-6 col-sm-4 col-md-4 col-lg-4" id="graphContainer" onclick="window.location.href='/Graph/Index/'+@Html.DisplayFor(modelItem => item.ID)">
+                <img class="clickBait" src="~/img/graph.png" style="height: 10%;" />
+                <p class="descText">Graphs</p>
+            </div>
+
+            <div class="clickBaitContainer col-xs-6 col-sm-4 col-md-4 col-lg-4" id="progressContainer" onclick="window.location.href=/Progress/">
+                <img class="clickBait" src="~/img/progress.png" style="height: 10%;" />
+                <p class="descText">Progress</p>
+            </div>
+        </div>
+    }
+</body>
+
+<script>
+    jQuery(document).ready(checkContainer);
+    function checkContainer() {
+        if ($('#profileContainer').is(':visible')) { //if the container is visible on the page
+            expandImage();
+        } else {
+            setTimeout(checkContainer, 50);//wait 50 ms, then try again
+        }
+    }
+
+    var x = document.getElementsByClassName("clickBaitContainer");
+    var i = 0;
+
+
+    function expandImage() {
+        document.getElementById("profileContainer").style.transform = "translateY(0px)";
+        x[i].style.visibility = "visible";
+        x[i].style.transform = "translateY(0px)";
+        i++;
+        if (i < x.length) {
+            setTimeout(expandImage, 400);
+        }
+    }
+</script>

@@ -61,8 +61,11 @@ circle {
 }
 
 .profileImage {
-    width: 150px;
-    height: 150px;
+    visibility: hidden;
+    width: 50px;
+    height: 50px;
+    transition: all 0.4s;
+    transition-timing-function: ease;
 }
 
     .profileImage:hover {
@@ -75,10 +78,14 @@ circle {
     margin-bottom: 50px;
 }
 
-#userName {
+.userName {
+    visibility: hidden;
     margin-top: 20px;
+    transition: all 0.4s;
+    transition-timing-function: ease;
 }
 
-    #userName:hover {
+    .userName:hover {
         cursor: pointer;
+        opacity: 0.3;
     }

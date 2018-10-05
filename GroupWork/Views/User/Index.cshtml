@@ -5,43 +5,44 @@
 }
 <head>
     <link href="@Url.Content("~/Content/User.css")" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body onload="myFunction()" style="margin:0;">
-<div class="svg-container" id="svg-container">
+    <div class="svg-container" id="svg-container">
 
-    <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
-        <circle cx="170" cy="170" r="160" stroke="#4666FF" />
-        <circle cx="170" cy="170" r="135" stroke="#404041" />
-        <circle cx="170" cy="170" r="110" stroke="#4666FF" />
-        <circle cx="170" cy="170" r="85" stroke="#404041" />
-    </svg>
+        <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+            <circle cx="170" cy="170" r="160" stroke="#4666FF" />
+            <circle cx="170" cy="170" r="135" stroke="#404041" />
+            <circle cx="170" cy="170" r="110" stroke="#4666FF" />
+            <circle cx="170" cy="170" r="85" stroke="#404041" />
+        </svg>
 
-</div>
-
-<div id="content">
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="userList col-lg-3 col-md-4 col-sm-6" onclick="window.location.href='/Welcome/Index/'+@Html.DisplayFor(modelItem => item.ID)">
-                    <img class="profileImage" src="https://avatars.dicebear.com/v2/identicon/: + @Html.DisplayFor(modelItem => item.UserName) +.svg" alt="Alternate Text" />
-                    <p id="userName">@Html.DisplayFor(modelItem => item.UserName)</p>
-                </div>
-            }
-        </div>
     </div>
 
-    <form style="display: inline" action="@Url.Action("Create", "User")" method="get">
-        <button class="btn btn-primary">New user</button>
-    </form>
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="userList col-lg-3 col-md-4 col-sm-6" id="profileContainer" onclick="window.location.href='/Home/Index/'+@Html.DisplayFor(modelItem => item.ID)">
+                        <img class="profileImage" src="https://avatars.dicebear.com/v2/identicon/: + @Html.DisplayFor(modelItem => item.UserName) +.svg" alt="Alternate Text" />
+                        <p class="userName">@Html.DisplayFor(modelItem => item.UserName)</p>
+                    </div>
+                }
+            </div>
+        </div>
 
-</div>
+        <form style="display: inline" action="@Url.Action("Create", "User")" method="get">
+            <button class="btn btn-primary">New user</button>
+        </form>
+
+    </div>
 
 </body>
 
 <script>
     var myVar;
-    
+
     function myFunction() {
         myVar = setTimeout(showPage, 500);
     }
@@ -50,5 +51,30 @@
         document.getElementById("svg-container").style.display = "none";
         document.getElementById("content").style.display = "block";
         document.getElementById("navbar").style.display = "none";
+    }
+
+    jQuery(document).ready(checkContainer);
+    function checkContainer() {
+        if ($('#profileContainer').is(':visible')) { //if the container is visible on the page
+            expandImage(); 
+        } else {
+            setTimeout(checkContainer, 50);//wait 50 ms, then try again
+        }
+    }
+
+    var x = document.getElementsByClassName("profileImage");
+    var y = document.getElementsByClassName("userName");
+    var i = 0;
+
+
+    function expandImage() {
+        x[i].style.visibility = "visible";
+        x[i].style.height = "150px";
+        x[i].style.width = "150px";     
+        y[i].style.visibility = "visible";
+        i++;
+        if (i < x.length) {
+            setTimeout(expandImage, 250);
+        }
     }
 </script>
