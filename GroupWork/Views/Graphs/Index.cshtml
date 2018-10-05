@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </head>
 
-<h2>Index</h2>
+<h2>Graphs</h2>
 
 <canvas id="myChart" width="400" height="200"></canvas>
 <script>
@@ -57,7 +57,8 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        labelString: 'weight'
                     }
                 }]
             }
@@ -65,47 +66,3 @@
     });
 </script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.User.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Height)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InputDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InputDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RecordID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RecordID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RecordID })
-            </td>
-        </tr>
-    }
-
-</table>
