@@ -18,14 +18,17 @@ namespace GroupWork.Controllers
         // GET: Progress
         public ActionResult Index()
         {
-            var records = db.Records.Include(r => r.User);
             var userId = Session["UserId"];
             if (userId == null)
             {
-                userId = 1;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var recordsList = records.Where(p => p.UserID == (int)userId).ToList();
-            return View(recordsList);
+            var user = db.Users.Find(userId);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(user);
         }
 
         // GET: Progress/Details/5
@@ -88,16 +91,18 @@ namespace GroupWork.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,WeightGoal")] User user)
+        public ActionResult Edit([Bind(Include = "ID,WeightGoal")] User newUser)
         {
             if (ModelState.IsValid)
             {
+                var user  = db.Users.Find(newUser.ID);
+                user.WeightGoal = newUser.WeightGoal;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "UserName", user.ID);
-            return View(user);
+            ViewBag.UserID = new SelectList(db.Users, "ID", "UserName", newUser.ID);
+            return View(newUser);
         }
 
         // GET: Progress/Delete/5

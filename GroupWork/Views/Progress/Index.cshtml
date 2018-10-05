@@ -1,17 +1,49 @@
-﻿@model IEnumerable<GroupWork.Models.Record>
+﻿@model GroupWork.Models.User
 
 @{
     ViewBag.Title = "Index";
+    var records = Model.Records.OrderByDescending(p => p.InputDate);
+    var weightLeftExists = false;
+    var weightLeft = 0.0;
+    if (records.Count() > 0)
+    {
+        weightLeft = records.First().Weight - Model.WeightGoal;
+        weightLeftExists = true;
+    }
 }
 
 <h2>Progress</h2>
 
-@if (Model.First().User.WeightGoal == 0)
+@if (Model.WeightGoal == 0)
 {
     <h3>No weight goal set.</h3>
-    <form style="display: inline" action="@Url.Action("Edit", "Progress", new { id=Model.First().RecordID })" method="get">
+    <form style="display: inline" action="@Url.Action("Edit", "Progress", new { id=Model.ID })" method="get">
         <button class="btn btn-primary">Set weight goal</button>
     </form>
+
+    <br />
+    <br />
+}
+else
+{
+    <h3>Weight goal: @Model.WeightGoal kg</h3>
+    <form style="display: inline" action="@Url.Action("Edit", "Progress", new { id=Model.ID })" method="get">
+        <button class="btn btn-primary">Edit weight goal</button>
+    </form>
+
+
+    if (weightLeftExists == true)
+    {
+        if (weightLeft <= 0)
+        {
+            <h3>Congratulations! You have reached your weight goal!</h3>
+        }
+        else
+        {
+            <h3>You have @weightLeft kg left to go to reach your weight goal.</h3>
+        }
+
+    }
 
     <br />
     <br />
@@ -20,25 +52,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.User.UserName)
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Weight)
+            Weight
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Height)
+            Height
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InputDate)
+            Input Date
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Records)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.User.UserName)
+                @Html.DisplayFor(modelItem => Model.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Weight)

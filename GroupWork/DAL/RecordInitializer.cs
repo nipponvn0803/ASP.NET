@@ -29,12 +29,12 @@ namespace GroupWork.DAL
             var records = new List<Record>
             {
             new Record{UserID=1,Weight=50,Height=150,InputDate=DateTime.Parse("2005-09-01")},
-            new Record{UserID=2,Weight=60,Height=160,InputDate=DateTime.Parse("2005-09-01")},
-            new Record{UserID=3,Weight=70,Height=170,InputDate=DateTime.Parse("2005-09-01")},
-            new Record{UserID=2,Weight=80,Height=180,InputDate=DateTime.Parse("2005-09-01")},
-            new Record{UserID=5,Weight=90,Height=190,InputDate=DateTime.Parse("2005-09-01")},
-            new Record{UserID=1,Weight=80,Height=180,InputDate=DateTime.Parse("2005-09-01")},
-            new Record{UserID=2,Weight=70,Height=170,InputDate=DateTime.Parse("2005-09-01")}
+            new Record{UserID=2,Weight=60,Height=160,InputDate=DateTime.Parse("2005-09-02")},
+            new Record{UserID=3,Weight=70,Height=170,InputDate=DateTime.Parse("2005-09-03")},
+            new Record{UserID=2,Weight=80,Height=180,InputDate=DateTime.Parse("2005-09-04")},
+            new Record{UserID=5,Weight=90,Height=190,InputDate=DateTime.Parse("2005-09-05")},
+            new Record{UserID=1,Weight=80,Height=180,InputDate=DateTime.Parse("2005-09-06")},
+            new Record{UserID=2,Weight=70,Height=170,InputDate=DateTime.Parse("2005-09-07")}
             };
             records.ForEach(s => context.Records.Add(s));
             context.SaveChanges();
